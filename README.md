@@ -28,6 +28,7 @@ This package can be installed by clonnig it from Git then installing its depende
 Running the App can be accomplished via npm.
 ```
 > cd ebsco
+> export DEBUG='ebsco:server'
 > npm start
 ```
 
