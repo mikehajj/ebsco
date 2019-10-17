@@ -1,0 +1,22 @@
+{
+  "name": "ebsco",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^3.1.0",
+    "body-parser": "^1.19.0",
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-jsonschema": "^1.1.6",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "request": "^2.88.0",
+    "xml2js": "^0.4.22"
+  }
+}
