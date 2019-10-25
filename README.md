@@ -84,3 +84,35 @@ You can change the engine by following 2 steps:
     > export DEBUG='ebsco:server'
     > npm start
     ```
+   
+#### Changing the default Values
+You can modify the default values that the applications uses such as the **PORT** of the application and the input names and the **URI** that the frontend uses to communicate with the **API**.
+   
+##### Example: 
+1. **Express Applicaiton:**
+      ```bash
+      > cd ebsco
+      > export DEBUG='ebsco:server'
+      > export PORT=4000
+      > npm start
+      ```
+    
+2. **Frontnend Widget:**
+      ```html
+      <div id="syndicator"></div>
+      <script>
+    	window.suggestionsOptions = {
+    		container: 'syndicator', //name of the container where the widget populates
+    		inputName: 'sugg_keywords', //name of the keywords input 
+    		searchName: 'sugg_search', //name of the search button
+    		searchLabel: 'Search', //search button label
+    		suggestionListName: 'suggestions', //name of the list that will show the suggestions
+    		searchBoxName: 'searchOutput', //name of the division that will display the error message if any
+    		API: {
+    			method: "POST", //the method that the API uses
+    			uri: "http://localhost:4000/autocomplete" //the API URI value
+    		}
+    	};
+      </script>
+      <script src='/javascripts/syndicator.js'></script>
+      ```
