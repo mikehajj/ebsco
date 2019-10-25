@@ -20,16 +20,8 @@ app.use( express.urlencoded( { extended: false } ) );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 //require custom application files
-const config = require( './lib/config' );
 const indexRouter = require( './lib/rest' );
 const response = require( './lib/response' );
-const logger = new require( 'bunyan' )( config.logger );
-
-//attach bunyan logger
-app.use((req, res, next) => {
-	req.log = logger;
-	next();
-});
 
 //requiring router module to implement rest calls
 app.use( indexRouter );
