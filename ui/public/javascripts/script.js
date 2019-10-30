@@ -38,12 +38,12 @@ const suggestions = {
 				}, 10 );
 			}
 			else {
-				printError( 200, msg );
+				printError( 200, msg.errors );
 			}
 		} );
 		
 		request.fail( ( jqXHR, status ) => {
-			printError( jqXHR.status, jqXHR.responseJSON );
+			printError( jqXHR.status, jqXHR.responseJSON.errors );
 		} );
 	},
 	
@@ -152,7 +152,7 @@ function printError( code, errorRepsonseObj ) {
 	
 	//case of IMFV error
 	if ( errorRepsonseObj && errorRepsonseObj.msg && errorRepsonseObj.msg.statusText === "Bad Request" ) {
-		console.log( "Error: ", errorRepsonseObj );
+		console.log( "Error: ", errorRepsonseObj.msg.validations );
 	}
 	
 	jQuery( "#searchOutput" ).append( `<div class="alert alert-danger text-center" role="alert"><b>${code}:</b>&nbsp;Something went wrong while executing your query. Please try again and if the problem persists, contact the Administrator.</div>` );
