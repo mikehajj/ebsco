@@ -63,7 +63,7 @@ router.post( '/autocomplete', validate( { body: config.schemas[ '/autocomplete' 
 		
 		businessLogic.loadEngine( req, ( error ) => {
 			if ( error ) {
-				return response.isError( res, error.code, error.message );
+				return response.isError( error.code, error.message );
 			}
 			next();
 		} );
