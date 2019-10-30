@@ -15,14 +15,14 @@ const app = express();
 const router = express.Router();
 
 // view engine setup
-app.set( 'views', path.join( __dirname, 'ui', 'views' ) );
+app.set( 'views', path.join( __dirname, '/../', 'ui', 'views' ) );
 app.set( 'view engine', 'hbs' );
 
 //attaching middleware to express application
 app.use( bodyParser.json() );
 app.use( express.json() );
 app.use( express.urlencoded( { extended: false } ) );
-app.use( express.static( path.join( __dirname, 'ui', 'public' ) ) );
+app.use( express.static( path.join( __dirname, '/../', 'ui', 'public' ) ) );
 
 //require custom application files
 const businessLogic = require( path.join( __dirname, '/../', 'lib', 'bl' ) );
