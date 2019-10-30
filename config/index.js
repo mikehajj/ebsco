@@ -8,7 +8,7 @@ let streamFormat = {
 };
 let loggerConfig = bFormat( streamFormat );
 
-const config = {
+const index = {
 	//logger configuration
 	logger: {
 		level: process.env.EBSCO_SUGGEST_DEBUG_LEVEL || 'debug',
@@ -44,4 +44,4 @@ const config = {
 	}
 };
 
-module.exports = config;
+module.exports = index;
