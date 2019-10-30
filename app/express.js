@@ -78,7 +78,7 @@ router.post( '/autocomplete', validate( { body: config.schemas[ '/autocomplete' 
 		let myResponse = null;
 		businessLogic.executeEngineCommand( req, ( error, data ) => {
 			if ( error ) {
-				myResponse = response.isError( error.code, error.data );
+				myResponse = response.isError( error.code, error.message );
 			}
 			else {
 				myResponse = response.isData( data );
