@@ -75,13 +75,18 @@ router.post( '/autocomplete', validate( { body: config.schemas[ '/autocomplete' 
 	 * @param res {Object}
 	 */
 		( req, res ) => {
-		
+		let myResponse = null;
 		businessLogic.executeEngineCommand( req, ( error, data ) => {
 			if ( error ) {
-				return response.isError( res, error.code, error.data );
+				myResponse = response.isError( error.code, error.data );
+			}
+			else {
+				myResponse = response.isData( data );
 			}
 			
-			return response.isData( res, data );
+			res.writeHead( myResponse.code, myResponse.header );
+			res.end( myResponse.response );
+			
 		} );
 	}
 ] );
@@ -103,7 +108,9 @@ app.use( ( err, req, res, next ) => {
 			statusText: 'Bad Request',
 			validations: err.validations  // All of the validation information
 		};
-		response.isError( res, 401, responseData );
+		let myResponse = response.isError( 401, responseData );
+		res.writeHead( myResponse.code, myResponse.header );
+		res.end( myResponse.response );
 	}
 	else {
 		// pass error to next error middleware handler
