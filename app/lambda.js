@@ -15,7 +15,7 @@ var validate = new Validator();
 /**
  * Specific route that handles the autocomplete operation using serverless architecture
  */
-exports.autocomplete = ( event, context, callback) => {
+exports.autocomplete = ( event ) => {
 	
 	const tasks = {
 		/**
@@ -45,7 +45,7 @@ exports.autocomplete = ( event, context, callback) => {
 			
 			let IMFVerrors = [];
 			validationResult.errors.forEach( ( oneIMFVError ) => {
-				IMFVerrors.push(`${oneIMFVError.stack}`);
+				IMFVerrors.push( `${ oneIMFVError.stack }` );
 			} );
 			
 			return next( {
@@ -86,25 +86,27 @@ exports.autocomplete = ( event, context, callback) => {
 		
 	};
 	
-	async.series( tasks, ( error, data ) => {
-		
-		let apiReponse = {
-			statusCode: 0,
-			body: '',
-		};
-		
-		let output = {};
-		
-		if ( error ) {
-			output = response.isError( error.code, error.message );
-		}
-		else {
-			output = response.isData( data[ 'invokeEngine' ] );
-		}
-		
-		apiReponse.statusCode = output.code;
-		apiReponse.headers = output.header;
-		apiReponse.body = JSON.stringify( output.response );
-		return callback(null, apiReponse);
+	return new Promise( resolve => {
+		async.series( tasks, ( error, data ) => {
+			
+			let apiReponse = {
+				statusCode: 0,
+				body: '',
+			};
+			
+			let output = {};
+			
+			if ( error ) {
+				output = response.isError( error.code, error.message );
+			}
+			else {
+				output = response.isData( data[ 'invokeEngine' ] );
+			}
+			
+			apiReponse.statusCode = output.code;
+			apiReponse.headers = output.header;
+			apiReponse.body = JSON.stringify( output.response );
+			resolve( apiReponse );
+		} );
 	} );
 };
