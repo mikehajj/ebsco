@@ -8,11 +8,11 @@
 const path = require( "path" );
 const async = require( "async" );
 
-const config = require( path.join( __dirname, '/./', 'config', 'index' ) );
+const config = require( path.join( __dirname, 'config', 'index' ) );
 const logger = new require( 'bunyan' )( config.logger );
 
-const businessLogic = require( path.join( __dirname, '/./', 'lib', 'bl' ) );
-const response = require( path.join( __dirname, '/./', 'lib', 'response' ) );
+const businessLogic = require( path.join( __dirname, 'lib', 'bl' ) );
+const response = require( path.join( __dirname, 'lib', 'response' ) );
 
 const Validator = require( 'jsonschema' ).Validator;
 var validate = new Validator();
