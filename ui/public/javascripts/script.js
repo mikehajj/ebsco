@@ -22,12 +22,23 @@ const suggestions = {
 		let requestOptions = {
 			method: this.config.API.method.toUpperCase(),
 			url: this.config.API.uri,
-			dataType: 'json',
-			data: { q: keywords }
+			async: true,
+			crossDomain: true,
+			processData: false,
+			headers: {
+				"Accept": "*",
+				"Content-Type": "application/json",
+			},
+			data: JSON.stringify({ q: keywords })
 		};
 		
 		let request = jQuery.ajax( requestOptions );
 		request.done( ( msg ) => {
+			
+			if(msg && msg.body && msg.statusCode && msg.headers){
+				msg = msg.body;
+			}
+			
 			if ( msg && msg.result ) {
 				let list = jQuery( "#suggestions" );
 				msg.data.forEach( ( oneOption ) => {
