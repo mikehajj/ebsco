@@ -22,6 +22,7 @@ const suggestions = {
 		let requestOptions = {
 			method: this.config.API.method.toUpperCase(),
 			url: this.config.API.uri,
+			dataType: 'json',
 			data: { q: keywords }
 		};
 		
@@ -43,7 +44,7 @@ const suggestions = {
 		} );
 		
 		request.fail( ( jqXHR, status ) => {
-			printError( jqXHR.status, jqXHR.responseJSON.errors );
+			printError( jqXHR.status, (jqXHR.responseJSON && jqXHR.responseJSON.errors) ? jqXHR.responseJSON.errors: jqXHR.responseJSON );
 		} );
 	},
 	
