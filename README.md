@@ -116,3 +116,38 @@ You can modify the default values that the applications uses such as the **PORT*
       </script>
       <script src='/javascripts/syndicator.js'></script>
       ```
+      
+# Serverless Deployment
+The application can also be deployed on serverless architecture. Currently the application supports **AWS Lambda** and **Google Functions**.
+
+### AWS Lambda
+The application contains a file named **lambda.js** at the root level. While creating your AWS lambda function, make sure you set the handler to: **lambda.autocomplete** which points to the autocomplete function located in the lambda.js file.
+
+Then attach an API trigger via the API Gateway that uses **POST** and enable **CORS** support. Finally deploy your API using AWS Console and copy the **URL** value.
+
+In the Frontend Widget, make sure you override the default configuration and set the URL value from AWS API Gateway.
+```html
+<script>
+    window.suggestionsOptions = {
+    	API: {
+    		uri: "https://%AWS-API-GATEWAY-URL-LINK-VALUE%" //the API URI value
+    	}
+    };
+</script>
+```
+
+### Google Functions
+The application contains a file named **function.js** at the root level. While creating your Google function, make sure you set the function to execute value to: **autocomplete** which points to the autocomplete function located in the function.js file.
+
+Then set the trigger to be **HTTP** and Google will create an **Endpoint** that will trigger your function. Once the Function is created, Google will provide you with a **URL** value, copy that value and paste it in the below snippet.
+
+In the Frontend Widget, make sure you override the default configuration and set the URL value from Google Functions.
+```html
+<script>
+    window.suggestionsOptions = {
+    	API: {
+    		uri: "https://%GOOGLE-FUNCTIONS-URL-LINK-VALUE%" //the API URI value
+    	}
+    };
+</script>
+```
