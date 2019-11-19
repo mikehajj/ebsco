@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "report": "rm -Rf .nyc_output && open ./tests/coverage/lcov-report/index.html",
+    "mocha": "./node_modules/.bin/mocha ./tests/integration/autocomplete.js --timeout=60000",
+    "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text --report-dir=./tests/coverage/ npm run mocha",
+    "test": "rm -Rf node_modules && rm -Rf ./tests/coverage && npm install && sleep 5 && npm run coverage && npm run report"
   },
   "dependencies": {
     "async": "^3.1.0",
@@ -19,5 +23,9 @@
     "jsonschema": "^1.2.4",
     "request": "^2.88.0",
     "xml2js": "^0.4.22"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   }
 }
