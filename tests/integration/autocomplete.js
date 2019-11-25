@@ -12,8 +12,6 @@ describe( "Testing Autocomplete API", () => {
 	 * Start the express App server
 	 */
 	before( ( done ) => {
-		process.env.DEBUG = "ebsco:server";
-		process.env.EBSCO_SUGGEST_ENGINE = "google";
 		expressApp = spawn( "npm", [ "start" ], {
 			cwd: __dirname,
 			env: process.env,
